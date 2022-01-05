@@ -1,0 +1,143 @@
+global function RiffSingleWeapon_Init
+
+#if SERVER
+#endif
+
+void function RiffSingleWeapon_Init()
+{
+
+
+
+    AddPrivateMatchModeSettingEnum( "#MODE_SETTING_CATEGORY_RIFF", "riff_forcedloadouts", [ "#SETTING_DISABLED", "#SETTING_ENABLED" ], "0" )
+    AddPrivateMatchModeSettingArbitrary( "SW", "sw_primary", "mp_weapon_rspn101", "Primary" )
+    AddPrivateMatchModeSettingArbitrary( "SW", "sw_secondary", "mp_weapon_autopistol", "Secondary" )
+    AddPrivateMatchModeSettingArbitrary( "SW", "sw_at", "mp_weapon_mgl", "Anti-titan" )
+    AddPrivateMatchModeSettingArbitrary( "SW", "sw_ordnance", "mp_weapon_frag_grenade", "Ordnance" )
+    AddPrivateMatchModeSettingArbitrary( "SW", "sw_tactical", "mp_ability_cloak", "Tactical" )
+    AddPrivateMatchModeSettingArbitrary( "SW", "sw_melee", "melee_pilot_emptyhanded", "Melee" )
+
+    var sw_primary_var = GetCurrentPlaylistVar("sw_primary")
+    var sw_secondary_var = GetCurrentPlaylistVar("sw_secondary")
+    var sw_at_var = GetCurrentPlaylistVar("sw_at")
+    var sw_ordnance_var = GetCurrentPlaylistVar("sw_ordnance")
+    var sw_tactical_var = GetCurrentPlaylistVar("sw_tactical")
+    var sw_melee_var = GetCurrentPlaylistVar("sw_melee")
+
+    string sw_primary = string(sw_primary_var)
+    string sw_secondary = string(sw_secondary_var)
+    string sw_at = string(sw_at_var)
+    string sw_ordnance = string(sw_ordnance_var)
+    string sw_tactical = string(sw_tactical_var)
+    string sw_melee = string(sw_melee_var)
+
+    SetConVarString("sw_primary", sw_primary)
+    SetConVarString("sw_secondary", sw_secondary)
+    SetConVarString("sw_at", sw_at)
+    SetConVarString("sw_ordnance", sw_ordnance)
+    SetConVarString("sw_tactical", sw_tactical)
+    SetConVarString("sw_melee", sw_melee)
+
+/*
+    ServerCommand( "sw_primary " + sw_primary )
+    ServerCommand( "sw_secondary " + sw_secondary )
+    ServerCommand( "sw_at " + sw_at )
+    ServerCommand( "sw_ordnance " + sw_ordnance )
+    ServerCommand( "sw_tactical " + sw_tactical )
+*/
+
+    #if SERVER
+	if ( GetCurrentPlaylistVarInt( "riff_forcedloadouts", 0 ) == 0 )
+		return
+
+	SetLoadoutGracePeriodEnabled( false )
+	SetWeaponDropsEnabled( false )
+
+
+	AddCallback_OnPlayerRespawned( SingleWeaponSetWeapons )
+	#endif
+
+
+}
+
+#if SERVER
+void function SingleWeaponSetWeapons( entity player )
+{
+	//SendHudMessage( player, "Everyone has the same weapons!", -1, 0.8, 255, 255, 255, 0, 0.15, 4, 0.15 )
+
+  foreach ( entity weapon in player.GetMainWeapons() )
+    player.TakeWeaponNow( weapon.GetWeaponClassName() )
+
+  foreach ( entity weapon in player.GetOffhandWeapons() )
+    player.TakeWeaponNow( weapon.GetWeaponClassName() )
+
+  ActuallySetWeapons( player, GetConVarString("sw_primary"), GetConVarString("sw_secondary"), GetConVarString("sw_at"), GetConVarString("sw_ordnance"), GetConVarString("sw_tactical"), GetConVarString("sw_melee") )
+}
+
+void function ActuallySetWeapons( entity player, string sw_primary, string sw_secondary, string sw_at, string sw_ordnance, string sw_tactical, string sw_melee )
+{
+  if ( sw_primary != "null" )
+  {
+    string sw_primary = GetConVarString("sw_primary")
+    player.GiveWeapon( sw_primary )
+  }
+  else
+  {
+    printt("no primary")
+  }
+
+  if ( sw_secondary != "null" )
+  {
+    string sw_secondary = GetConVarString("sw_secondary")
+    player.GiveWeapon( sw_secondary )
+  }
+  else
+  {
+    printt("no secondary")
+  }
+
+  if ( sw_at != "null" )
+  {
+    string sw_at = GetConVarString("sw_at")
+    player.GiveWeapon( sw_at )
+  }
+  else
+  {
+    printt("no anti-titan")
+  }
+
+  if ( sw_ordnance != "null" )
+  {
+    string sw_ordnance = GetConVarString("sw_ordnance")
+    player.GiveOffhandWeapon( sw_ordnance, OFFHAND_ORDNANCE )
+  }
+  else
+  {
+    printt("no ordnance")
+  }
+
+  if ( sw_tactical != "null" )
+  {
+    string sw_tactical = GetConVarString("sw_tactical")
+    player.GiveOffhandWeapon( sw_tactical, OFFHAND_SPECIAL)
+  }
+  else
+  {
+    printt("no tactical")
+  }
+
+  if ( sw_melee != "null" )
+  {
+    string sw_melee = GetConVarString("sw_melee")
+    player.GiveOffhandWeapon( sw_melee, OFFHAND_MELEE)
+  }
+  else
+  {
+    printt("no melee")
+  }
+}
+
+
+
+
+
+#endif

@@ -1,0 +1,32 @@
+untyped
+global function NanoCustomAutoprecache
+
+void function NanoCustomAutoprecache()
+{
+	PrecacheWeapon( "mp_weapon_deployable_cloak" )
+	PrecacheWeapon( "melee_onepunch" )
+	PrecacheWeapon( "mp_ability_blink" )
+	PrecacheWeapon( "mp_ability_duo" )
+	//PrecacheWeapon( "mp_ability_inertia" )
+	//PrecacheWeapon( "mp_ability_mindhack" )
+	PrecacheWeapon( "mp_ability_swapper" )
+	PrecacheWeapon( "mp_weapon_artillary_lmg" )
+	PrecacheWeapon( "mp_weapon_bouncygun" )
+	PrecacheWeapon( "mp_weapon_burst_sniper" )
+	PrecacheWeapon( "mp_weapon_burstpistol" )
+	PrecacheWeapon( "mp_weapon_defender_ar" )
+	PrecacheWeapon( "mp_weapon_doublebarrel" )
+	//PrecacheWeapon( "mp_weapon_energy_ar" )
+	//PrecacheWeapon( "mp_weapon_energypistol_thy" )
+	//PrecacheWeapon( "mp_weapon_energysniper" )
+	PrecacheWeapon( "mp_weapon_marksman_ar" )
+	//PrecacheWeapon( "mp_weapon_minigun" )
+	PrecacheWeapon( "mp_weapon_pdw" )
+	//PrecacheWeapon( "mp_weapon_reaperrifle" )
+	PrecacheWeapon( "mp_weapon_scareb_gun" )
+	//PrecacheWeapon( "mp_weapon_smart_pistol_mk7" )
+	PrecacheWeapon( "mp_weapon_smart_rifle" )
+	//PrecacheWeapon( "mp_weapon_smart_sniper" )
+	PrecacheWeapon( "mp_weapon_undertaker" )
+
+}

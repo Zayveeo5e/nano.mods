@@ -1,0 +1,74 @@
+{
+	"ApiId" : "nano.fun",
+	"Name" : "Nano's fun pack",
+	"Description" : "Fun random shit",
+        "RequiredOnClient": true,
+	"Authors" : [
+		"Nanohm (other stuff and porting), Thylord (some of the weapons)"
+	],
+	"Contacts" : [
+		"NanohmTheProtogen#0282"
+	],
+	"Version" : "0.5",
+	"Scripts": [
+		{
+			"Path": "weapons/mp_weapon_deploy_cloakfield.nut",
+			"RunOn": "( CLIENT || SERVER ) && MP",
+		},
+		{
+			"Path": "nano_custom_autoprecache.gnut",
+			"RunOn": "( CLIENT || SERVER ) && MP",
+			"ClientCallback": {
+					"After": "NanoCustomAutoprecache"
+			},
+
+			"ServerCallback": {
+					"After": "NanoCustomAutoprecache"
+			}
+		},
+		{
+			"Path": "weapons/GenericSecondMode.nut",
+			"RunOn": "( CLIENT || SERVER ) && MP",
+		},
+		{
+			"Path": "thylord/mp_weapon_energy_ar.nut",
+			"RunOn": "( CLIENT || SERVER ) && MP",
+		},
+		{
+			"Path": "thylord/blink.nut",
+			"RunOn": "( CLIENT || SERVER ) && MP",
+		},
+		{
+			"Path": "thylord/dash.nut",
+			"RunOn": "( CLIENT || SERVER ) && MP",
+		},
+		{
+			"Path": "thylord/defender_ar.nut",
+			"RunOn": "( CLIENT || SERVER ) && MP",
+		},
+		{
+			"Path": "thylord/doublebarrel.nut",
+			"RunOn": "( CLIENT || SERVER ) && MP",
+		},
+		{
+			"Path": "thylord/duo.nut",
+			"RunOn": "( CLIENT || SERVER ) && MP",
+		},
+		{
+			"Path": "thylord/inertia.nut",
+			"RunOn": "( CLIENT || SERVER ) && MP",
+		},
+		{
+			"Path": "thylord/mindhack.nut",
+			"RunOn": "( CLIENT || SERVER ) && MP",
+		},
+		{
+			"Path": "thylord/super_stim.nut",
+			"RunOn": "( CLIENT || SERVER ) && MP",
+		},
+		{
+			"Path": "weapons/mp_ability_swapper.nut",
+			"RunOn": "( CLIENT || SERVER ) && MP",
+		},
+	]
+}

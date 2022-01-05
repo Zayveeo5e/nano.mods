@@ -1,0 +1,33 @@
+global function RiffRefillKill_Init
+
+void function RiffRefillKill_Init()
+{
+  AddPrivateMatchModeSettingEnum( "#MODE_SETTING_CATEGORY_RIFF", "riff_refillkill", [ "#SETTING_DISABLED", "#SETTING_ENABLED" ], "0" )
+
+  #if SERVER
+if ( GetCurrentPlaylistVarInt( "riff_refillkill", 0 ) == 0 )
+  return
+
+//AddCallback_OnPlayerRespawned( LmaoboxSetWeapons )
+AddCallback_OnPlayerKilled( RefillKillGiveAmmo )
+#endif
+}
+
+void function RefillKillGiveAmmo( entity victim, entity attacker, var damageInfo )
+{
+	if ( !victim.IsPlayer() || !attacker.IsPlayer() || victim == attacker )
+		return
+
+	foreach ( entity weapon in attacker.GetMainWeapons() ) {
+    if ( weapon.GetWeaponClassName == "mp_weapon_defender" )
+    {
+      int max = weapon.GetWeaponAmmoStockpile( weapon )
+      weapon.SetWeaponPrimaryAmmoCount( max )
+    }
+    else
+    {
+      int max = weapon.GetWeaponPrimaryClipCountMax()
+      weapon.SetWeaponPrimaryClipCount( max )
+    }
+    }
+}
