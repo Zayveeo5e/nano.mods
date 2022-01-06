@@ -6,31 +6,31 @@
   "ConVars": [
     {
       "Name": "obit_Suicide",
-      "DefaultValue": "0"
+      "DefaultValue": "0" //Number of Suicide sounds
     },
     {
       "Name": "obit_Headshot",
-      "DefaultValue": "0"
+      "DefaultValue": "0" //Number of Headshot sounds
     },
     {
       "Name": "obit_Kill",
-      "DefaultValue": "0"
+      "DefaultValue": "0" //Number of Kill sounds
     },
     {
       "Name": "obit_Death",
-      "DefaultValue": "0"
+      "DefaultValue": "0" //Number of Death sounds
     },
     {
       "Name": "obit_CritDeath",
-      "DefaultValue": "0"
+      "DefaultValue": "0" //Number of Crit Death sounds
     },
     {
       "Name": "obit_Execution",
-      "DefaultValue": "0"
+      "DefaultValue": "0" //Number of Execution sounds
     },
     {
       "Name": "obit_Executed",
-      "DefaultValue": "0"
+      "DefaultValue": "0" //Number of Executed sounds
     },
   ],
   "Scripts": [],
