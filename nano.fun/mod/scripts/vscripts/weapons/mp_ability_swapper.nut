@@ -6,7 +6,7 @@ var function OnWeaponPrimaryAttack_Swap( entity weapon, WeaponPrimaryAttackParam
   entity player = weapon.GetWeaponOwner();
   vector eyePosition = player.EyePosition();
 	vector viewVector = player.GetViewVector();
-  TraceResults traceResults = TraceLineHighDetail( eyePosition, eyePosition + viewVector * 10000, player, TRACE_MASK_PLAYERSOLID, TRACE_COLLISION_GROUP_PLAYER );
+  TraceResults traceResults = TraceLineHighDetail( eyePosition, eyePosition + viewVector * 100000, player, TRACE_MASK_PLAYERSOLID, TRACE_COLLISION_GROUP_PLAYER );
 
   if (traceResults.hitEnt)
   {
@@ -24,6 +24,7 @@ void function Nano_Swapper( entity victim, entity player )
 {
   #if SERVER
   //entity player = weapon.GetWeaponOwner();
+  player.PhaseShiftBegin( 0, 0.1 )
   player.PhaseShiftBegin( 0, 0.1 )
 
   vector victim_pos = victim.GetOrigin()

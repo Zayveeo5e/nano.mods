@@ -9,7 +9,7 @@
 	"Contacts" : [
 		"NanohmTheProtogen#0282"
 	],
-	"Version" : "0.5",
+	"Version" : "0.6",
 	"Scripts": [
 		{
 			"Path": "weapons/mp_weapon_deploy_cloakfield.nut",
@@ -31,10 +31,6 @@
 			"RunOn": "( CLIENT || SERVER ) && MP",
 		},
 		{
-			"Path": "thylord/mp_weapon_energy_ar.nut",
-			"RunOn": "( CLIENT || SERVER ) && MP",
-		},
-		{
 			"Path": "thylord/blink.nut",
 			"RunOn": "( CLIENT || SERVER ) && MP",
 		},
@@ -43,31 +39,15 @@
 			"RunOn": "( CLIENT || SERVER ) && MP",
 		},
 		{
-			"Path": "thylord/defender_ar.nut",
-			"RunOn": "( CLIENT || SERVER ) && MP",
-		},
-		{
 			"Path": "thylord/doublebarrel.nut",
 			"RunOn": "( CLIENT || SERVER ) && MP",
 		},
 		{
-			"Path": "thylord/duo.nut",
-			"RunOn": "( CLIENT || SERVER ) && MP",
-		},
-		{
-			"Path": "thylord/inertia.nut",
-			"RunOn": "( CLIENT || SERVER ) && MP",
-		},
-		{
-			"Path": "thylord/mindhack.nut",
-			"RunOn": "( CLIENT || SERVER ) && MP",
-		},
-		{
-			"Path": "thylord/super_stim.nut",
-			"RunOn": "( CLIENT || SERVER ) && MP",
-		},
-		{
 			"Path": "weapons/mp_ability_swapper.nut",
+			"RunOn": "( CLIENT || SERVER ) && MP",
+		},
+		{
+			"Path": "weapons/mp_ability_captains_shield.nut",
 			"RunOn": "( CLIENT || SERVER ) && MP",
 		},
 	]

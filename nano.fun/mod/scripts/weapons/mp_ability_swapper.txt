@@ -24,7 +24,7 @@ WeaponData
 	"sound_weapon_ready"							"HUD_kit_meter_replenished_1P"
 
 	"ammo_clip_size"   								"40"
-	"ammo_default_total"							"0"
+	"ammo_default_total"							"40"
 	"ammo_display"									"bar"
 	"ammo_min_to_fire"								"40"
 	"ammo_per_shot"									"40"
