@@ -1,0 +1,38 @@
+{
+  "Name": "Nano.Killsounds+",
+  "Description": "Custom death sounds",
+
+  "LoadPriority": 0,
+  "ConVars": [
+    {
+      "Name": "obit_Suicide",
+      "DefaultValue": "0"
+    },
+    {
+      "Name": "obit_Headshot",
+      "DefaultValue": "0"
+    },
+    {
+      "Name": "obit_Kill",
+      "DefaultValue": "0"
+    },
+    {
+      "Name": "obit_Death",
+      "DefaultValue": "0"
+    },
+    {
+      "Name": "obit_CritDeath",
+      "DefaultValue": "0"
+    },
+    {
+      "Name": "obit_Execution",
+      "DefaultValue": "0"
+    },
+    {
+      "Name": "obit_Executed",
+      "DefaultValue": "0"
+    },
+  ],
+  "Scripts": [],
+  "Localisation": []
+}
