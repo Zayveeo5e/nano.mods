@@ -2,7 +2,7 @@
     "Name": "nano.riffs",
     "Description": "Adds a bunch of custom riffs",
     "LoadPriority": 0,
-    "Version": "0.0.1",
+    "Version": "0.3",
     "ConVars": [
       {
   			"Name": "sw_primary",
