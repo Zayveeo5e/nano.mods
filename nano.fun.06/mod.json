@@ -1,5 +1,5 @@
 {
-	"ApiId" : "nano.fun",
+	"ApiId" : "nano.fun.06",
 	"Name" : "Nano's fun pack",
 	"Description" : "Fun random shit",
         "RequiredOnClient": true,

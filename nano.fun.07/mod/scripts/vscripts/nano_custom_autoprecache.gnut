@@ -1,0 +1,10 @@
+untyped
+global function NanoCustomAutoprecache
+
+void function NanoCustomAutoprecache()
+{
+	PrecacheWeapon( "mp_weapon_deployable_cloak" )
+	PrecacheWeapon( "mp_ability_swapper" )
+	PrecacheWeapon( "mp_weapon_doublebarrel" )
+  PrecacheWeapon("mp_ability_cshield")
+}
