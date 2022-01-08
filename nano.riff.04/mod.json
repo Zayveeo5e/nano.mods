@@ -1,0 +1,75 @@
+{
+    "Name": "nano.riffs",
+    "Description": "Adds a bunch of custom riffs",
+    "LoadPriority": 0,
+    "Version": "0.4",
+    "ConVars": [
+      {
+  			"Name": "sw_primary",
+  			"DefaultValue": "null"
+  		},
+      {
+  			"Name": "sw_secondary",
+  			"DefaultValue": "null"
+  		},
+      {
+  			"Name": "sw_at",
+  			"DefaultValue": "null"
+  		},
+      {
+  			"Name": "sw_ordnance",
+  			"DefaultValue": "null"
+  		},
+      {
+  			"Name": "sw_tactical",
+  			"DefaultValue": "null"
+  		},
+      {
+  			"Name": "sw_melee",
+  			"DefaultValue": "null"
+  		},
+      {
+  			"Name": "sw_antirodeo",
+  			"DefaultValue": "null"
+  		},
+      {
+  			"Name": "sw_equipment",
+  			"DefaultValue": "null"
+  		},
+    ],
+    "Scripts": [
+       {
+        "Path": "gamemodes/sh_riff_forcedloadouts.gnut",
+        "RunOn": "( CLIENT || SERVER ) && MP",
+        "ClientCallback": {
+            "After": "RiffSingleWeapon_Init"
+        },
+
+        "ServerCallback": {
+            "After": "RiffSingleWeapon_Init"
+        }
+      },
+    {
+     "Path": "gamemodes/sh_riff_refill.gnut",
+     "RunOn": "( CLIENT || SERVER ) && MP",
+     "ClientCallback": {
+         "After": "RiffRefillKill_Init"
+     },
+
+     "ServerCallback": {
+         "After": "RiffRefillKill_Init"
+     }
+   },
+   {
+    "Path": "gamemodes/sh_riff_payback.nut",
+    "RunOn": "( CLIENT || SERVER ) && MP",
+    "ClientCallback": {
+        "After": "MartyrDeath_Init"
+    },
+
+    "ServerCallback": {
+        "After": "MartyrDeath_Init"
+    }
+  },
+  ],
+}

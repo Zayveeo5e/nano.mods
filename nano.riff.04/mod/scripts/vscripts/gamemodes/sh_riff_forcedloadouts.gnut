@@ -1,0 +1,233 @@
+global function RiffSingleWeapon_Init
+
+#if SERVER
+#endif
+
+void function RiffSingleWeapon_Init()
+{
+
+
+
+    AddPrivateMatchModeSettingEnum( "#MODE_SETTING_CATEGORY_RIFF", "riff_forcedloadouts", [ "#SETTING_DISABLED", "#SETTING_ENABLED" ], "0" )
+    AddPrivateMatchModeSettingArbitrary( "Loadout Options", "sw_primary", "null", "Primary" )
+    AddPrivateMatchModeSettingArbitrary( "Loadout Options", "sw_secondary", "null", "Secondary" )
+    AddPrivateMatchModeSettingArbitrary( "Loadout Options", "sw_at", "null", "Anti-titan" )
+    AddPrivateMatchModeSettingArbitrary( "Loadout Options", "sw_ordnance", "null", "Ordnance" )
+    AddPrivateMatchModeSettingArbitrary( "Loadout Options", "sw_tactical", "null", "Tactical" )
+    AddPrivateMatchModeSettingArbitrary( "Loadout Options", "sw_melee", "null", "Melee" )
+    AddPrivateMatchModeSettingArbitrary( "Loadout Options", "sw_antirodeo", "null", "Anti-Rodeo" )
+    AddPrivateMatchModeSettingArbitrary( "Loadout Options", "sw_equipment", "null", "Boost" )
+
+    var sw_primary_var = GetCurrentPlaylistVar("sw_primary")
+    var sw_secondary_var = GetCurrentPlaylistVar("sw_secondary")
+    var sw_at_var = GetCurrentPlaylistVar("sw_at")
+    var sw_ordnance_var = GetCurrentPlaylistVar("sw_ordnance")
+    var sw_tactical_var = GetCurrentPlaylistVar("sw_tactical")
+    var sw_melee_var = GetCurrentPlaylistVar("sw_melee")
+    var sw_antirodeo_var = GetCurrentPlaylistVar("sw_antirodeo")
+    var sw_equipment_var = GetCurrentPlaylistVar("sw_equipment")
+
+    string sw_primary = string(sw_primary_var)
+    string sw_secondary = string(sw_secondary_var)
+    string sw_at = string(sw_at_var)
+    string sw_ordnance = string(sw_ordnance_var)
+    string sw_tactical = string(sw_tactical_var)
+    string sw_melee = string(sw_melee_var)
+    string sw_antirodeo = string(sw_antirodeo_var)
+    string sw_equipment = string(sw_equipment_var)
+
+    SetConVarString("sw_primary", sw_primary)
+    SetConVarString("sw_secondary", sw_secondary)
+    SetConVarString("sw_at", sw_at)
+    SetConVarString("sw_ordnance", sw_ordnance)
+    SetConVarString("sw_tactical", sw_tactical)
+    SetConVarString("sw_melee", sw_melee)
+    SetConVarString("sw_antirodeo", sw_antirodeo)
+    SetConVarString("sw_equipment", sw_equipment)
+
+/*
+    ServerCommand( "sw_primary " + sw_primary )
+    ServerCommand( "sw_secondary " + sw_secondary )
+    ServerCommand( "sw_at " + sw_at )
+    ServerCommand( "sw_ordnance " + sw_ordnance )
+    ServerCommand( "sw_tactical " + sw_tactical )
+*/
+
+    #if SERVER
+	if ( GetCurrentPlaylistVarInt( "riff_forcedloadouts", 0 ) == 0 )
+		return
+
+	SetLoadoutGracePeriodEnabled( false )
+	SetWeaponDropsEnabled( false )
+
+
+	AddCallback_OnPlayerRespawned( ForcedLoadoutRespawn )
+	#endif
+
+
+}
+
+#if SERVER
+
+void function ForcedLoadoutRespawn( entity player )
+{
+  ForcedLoadoutSetWeapons( player, GetConVarString("sw_primary"), GetConVarString("sw_secondary"), GetConVarString("sw_at"), GetConVarString("sw_ordnance"), GetConVarString("sw_tactical"), GetConVarString("sw_melee"), GetConVarString("sw_antirodeo"), GetConVarString("sw_equipment") )
+}
+
+void function ForcedLoadoutSetWeapons( entity player, string sw_primary, string sw_secondary, string sw_at, string sw_ordnance, string sw_tactical, string sw_melee, string sw_antirodeo, string sw_equipment )
+{
+	//SendHudMessage( player, "Everyone has the same weapons!", -1, 0.8, 255, 255, 255, 0, 0.15, 4, 0.15 )
+  if ( sw_at != "none" )
+  {
+    if ( sw_at == "null" )
+    {
+      printt("Leaving Anti-Titan")
+    }
+    else
+    {
+      player.TakeWeaponNow(player.GetMainWeapons()[2].GetWeaponClassName())
+      string sw_at = GetConVarString("sw_at")
+      player.GiveWeapon( sw_at )
+    }
+  }
+  if ( sw_at == "none" )
+    {
+      player.TakeWeaponNow(player.GetMainWeapons()[2].GetWeaponClassName())
+    }
+
+    if ( sw_secondary != "none" )
+    {
+      if ( sw_secondary == "null" )
+      {
+        printt("Leaving Secondary")
+      }
+      else
+      {
+        player.TakeWeaponNow(player.GetMainWeapons()[1].GetWeaponClassName())
+        string sw_secondary = GetConVarString("sw_secondary")
+        player.GiveWeapon( sw_secondary )
+      }
+    }
+    if ( sw_secondary == "none" )
+    {
+      player.TakeWeaponNow(player.GetMainWeapons()[1].GetWeaponClassName())
+    }
+
+  if ( sw_primary != "none" )
+  {
+    if ( sw_primary == "null" )
+    {
+      printt("Leaving Primary")
+    }
+    else
+    {
+      player.TakeWeaponNow(player.GetMainWeapons()[0].GetWeaponClassName())
+      string sw_primary = GetConVarString("sw_primary")
+      player.GiveWeapon( sw_primary )
+    }
+  }
+  if (sw_primary == "none" )
+  {
+    player.TakeWeaponNow(player.GetMainWeapons()[0].GetWeaponClassName())
+  }
+
+  if ( sw_ordnance != "none" )
+  {
+    if ( sw_ordnance == "null" )
+    {
+      printt("Leaving Ordnance")
+    }
+    else
+    {
+      player.TakeOffhandWeapon(OFFHAND_ORDNANCE)
+      string sw_ordnance = GetConVarString("sw_ordnance")
+      player.GiveOffhandWeapon( sw_ordnance, OFFHAND_ORDNANCE )
+    }
+  }
+  if ( sw_ordnance == "none" )
+  {
+    player.TakeOffhandWeapon(OFFHAND_ORDNANCE)
+  }
+
+  if ( sw_tactical != "none" )
+  {
+    if ( sw_tactical == "null" )
+    {
+      printt("Leaving Tactical")
+    }
+    else
+    {
+      player.TakeOffhandWeapon(OFFHAND_SPECIAL)
+      string sw_tactical = GetConVarString("sw_tactical")
+      player.GiveOffhandWeapon( sw_tactical, OFFHAND_SPECIAL)
+    }
+  }
+  if ( sw_tactical == "none" )
+  {
+    player.TakeOffhandWeapon(OFFHAND_SPECIAL)
+  }
+
+  if ( sw_melee != "none" )
+  {
+    if ( sw_melee == "null" )
+    {
+      printt("Leaving Melee")
+    }
+    else
+    {
+      player.TakeOffhandWeapon(OFFHAND_MELEE)
+      string sw_melee = GetConVarString("sw_melee")
+      player.GiveOffhandWeapon( sw_melee, OFFHAND_MELEE)
+    }
+  }
+  if ( sw_melee == "none" )
+  {
+    player.TakeOffhandWeapon(OFFHAND_MELEE)
+  }
+
+  if ( sw_antirodeo != "none" )
+  {
+    if ( sw_antirodeo == "null" )
+    {
+      printt("Leaving Anti-Rodeo")
+    }
+    else
+    {
+      player.TakeOffhandWeapon(OFFHAND_ANTIRODEO)
+      string sw_antirodeo = GetConVarString("sw_antirodeo")
+      player.GiveOffhandWeapon( sw_antirodeo, OFFHAND_ANTIRODEO)
+    }
+  }
+  if ( sw_antirodeo == "none" )
+  {
+    player.TakeOffhandWeapon(OFFHAND_ANTIRODEO)
+  }
+
+  if ( sw_equipment != "none" )
+  {
+    if ( sw_equipment == "null" )
+    {
+      printt("Leaving Boost")
+    }
+    else
+    {
+      player.TakeOffhandWeapon(OFFHAND_EQUIPMENT)
+      string sw_equipment = GetConVarString("sw_equipment")
+      player.GiveOffhandWeapon( sw_equipment, OFFHAND_EQUIPMENT)
+    }
+  }
+  if (sw_equipment == "none" )
+  {
+    player.TakeOffhandWeapon(OFFHAND_EQUIPMENT)
+  }
+
+
+
+}
+
+
+
+
+
+
+#endif
